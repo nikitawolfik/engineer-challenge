@@ -1,6 +1,6 @@
-import Navbar from "./Navbar";
-import Header from "./Header";
-import Table from "./Table";
+import Navbar from "components/Navbar";
+import Header from "components/Header";
+import Table from "components/Table";
 
 import "./index.css";
 
@@ -13,6 +13,5 @@ const App = () => (
     </div>
   </div>
 );
-
 
 export default App;
