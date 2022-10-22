@@ -1,17 +1,32 @@
 import Navbar from "components/Navbar";
 import Header from "components/Header";
 import Table from "components/Table";
+import { SWRConfig } from "swr";
 
 import "./index.css";
 
-const App = () => (
-  <div>
-    <Navbar />
-    <div className="w-full p-8">
-      <Header />
-      <Table />
+const App = () => {
+  return (
+    <div>
+      <SWRConfig
+        value={{
+          fetcher: (resource, init) =>
+            fetch(`${process.env.REACT_APP_API_PATH}${resource}`, init).then(
+              (res) => {
+                console.log("fuck", res);
+                return res.json();
+              }
+            ),
+        }}
+      >
+        <Navbar />
+        <div className="w-full p-8">
+          <Header />
+          <Table />
+        </div>
+      </SWRConfig>
     </div>
-  </div>
-);
+  );
+};
 
 export default App;
