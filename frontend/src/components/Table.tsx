@@ -6,10 +6,13 @@ import usePolicies from "data/usePolicies";
 import Select from "./Select";
 import { InsuranceType, PolicyStatus } from "types";
 
+const ROWS_PER_PAGE = 5;
+
 const Table = () => {
   const [searchValue, setSearchValue] = useState("");
   const [selectType, setSelectType] = useState<InsuranceType | "">("");
   const [selectStatus, setSelectStatus] = useState<PolicyStatus | "">("");
+  const [page, setPage] = useState(1);
   const { policies, isFetching } = usePolicies(searchValue);
 
   const shownPolicies = useMemo(() => {
@@ -24,9 +27,10 @@ const Table = () => {
     if (selectStatus) {
       result = result.filter((entry) => entry.status === selectStatus);
     }
+    setPage(1);
 
     return result;
-  }, [policies, selectType, selectStatus]);
+  }, [policies, selectType, selectStatus, setPage]);
 
   return (
     <div className="flex flex-col">
@@ -118,29 +122,57 @@ const Table = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {shownPolicies.map((result, i) => (
-                    <tr className="border-b" key={result.id}>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                        {i + 1}
-                      </td>
-                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                        {`${result.customer.firstName} ${result.customer.lastName}`}
-                      </td>
-                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                        {result.provider}
-                      </td>
-                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                        {result.insuranceType}
-                      </td>
-                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                        <Badge status={result.status} />
-                      </td>
-                    </tr>
-                  ))}
+                  {shownPolicies
+                    .slice((page - 1) * ROWS_PER_PAGE, page * ROWS_PER_PAGE)
+                    .map((result, i) => (
+                      <tr className="border-b" key={result.id}>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                          {i + 1}
+                        </td>
+                        <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                          {`${result.customer.firstName} ${result.customer.lastName}`}
+                        </td>
+                        <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                          {result.provider}
+                        </td>
+                        <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                          {result.insuranceType}
+                        </td>
+                        <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                          <Badge status={result.status} />
+                        </td>
+                      </tr>
+                    ))}
                 </tbody>
               </table>
             ) : (
               <p>No results</p>
+            )}
+            {shownPolicies.length > ROWS_PER_PAGE && (
+              <div className="flex justify-center items-center space-x-5 my-2">
+                <button
+                  type="button"
+                  className="rounded-lg p-2 px-4 border-solid border-slate-50 border-2 bg-indigo-500 disabled:bg-indigo-200 disabled:cursor-not-allowed"
+                  onClick={() => setPage((page) => page - 1)}
+                  disabled={page === 1}
+                >
+                  Prev
+                </button>
+                <span>
+                  Page {page} out of{" "}
+                  {Math.round(shownPolicies.length / ROWS_PER_PAGE)}
+                </span>
+                <button
+                  type="button"
+                  className="rounded-lg p-2 px-4 border-solid border-slate-50 border-2 bg-indigo-500 disabled:bg-indigo-200 disabled:cursor-not-allowed"
+                  onClick={() => setPage((page) => page + 1)}
+                  disabled={
+                    page === Math.round(shownPolicies.length / ROWS_PER_PAGE)
+                  }
+                >
+                  Next
+                </button>
+              </div>
             )}
           </div>
         </div>
