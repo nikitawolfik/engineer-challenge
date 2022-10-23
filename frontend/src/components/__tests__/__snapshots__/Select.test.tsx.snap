@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Search input Snapshot 1`] = `
+<div>
+  <div
+    class="flex flex-col mb-2 flex-1"
+  >
+    <label
+      class="text-xs ml-2 mb-1"
+      for="select-Test name"
+    >
+      Hello label
+    </label>
+    <select
+      class="rounded-lg p-2 border-solid border-slate-50 border-2"
+      name="Test name"
+      placeholder="Hello label"
+    >
+      <option
+        value="one"
+      >
+        one
+      </option>
+      <option
+        value="two"
+      >
+        two
+      </option>
+    </select>
+  </div>
+</div>
+`;

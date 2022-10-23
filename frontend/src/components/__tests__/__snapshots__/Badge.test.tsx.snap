@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Search input Snapshot 1`] = `
+<div>
+  <p
+    class="inline-block rounded-full	py-1 px-4 font-semibold text-xs tc-green-100 bg-green-100"
+  >
+    ACTIVE
+  </p>
+</div>
+`;
+
+exports[`Search input Snapshot 2`] = `
+<div>
+  <p
+    class="inline-block rounded-full	py-1 px-4 font-semibold text-xs tc-red-100 bg-red-100"
+  >
+    CANCELLED
+  </p>
+</div>
+`;
+
+exports[`Search input Snapshot 3`] = `
+<div>
+  <p
+    class="inline-block rounded-full	py-1 px-4 font-semibold text-xs tc-red-100 bg-red-100"
+  >
+    DROPPED_OUT
+  </p>
+</div>
+`;
+
+exports[`Search input Snapshot 4`] = `
+<div>
+  <p
+    class="inline-block rounded-full	py-1 px-4 font-semibold text-xs tc-yellow-600 bg-yellow-100"
+  >
+    PENDING
+  </p>
+</div>
+`;
