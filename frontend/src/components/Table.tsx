@@ -69,6 +69,7 @@ const Table = () => {
         <button
           className="rounded-lg p-2 border-solid border-slate-50 border-2"
           type="button"
+          data-testid="resetFilters"
           onClick={() => {
             setSearchValue("");
             setSelectStatus("");
@@ -149,7 +150,10 @@ const Table = () => {
               <p>No results</p>
             )}
             {shownPolicies.length > ROWS_PER_PAGE && (
-              <div className="flex justify-center items-center space-x-5 my-2">
+              <div
+                data-testid="pagination"
+                className="flex justify-center items-center space-x-5 my-2"
+              >
                 <button
                   type="button"
                   className="rounded-lg p-2 px-4 border-solid border-slate-50 border-2 bg-indigo-500 disabled:bg-indigo-200 disabled:cursor-not-allowed"
