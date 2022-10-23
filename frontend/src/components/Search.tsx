@@ -1,15 +1,15 @@
 import React from "react";
 
-interface Props {
+export interface InputProps {
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   label: string;
   name: string;
 }
 
-const Search = ({ value, onChange, label, name }: Props) => {
+const Search = ({ value, onChange, label, name }: InputProps) => {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col mb-2">
       <label className="text-xs ml-2 mb-1" htmlFor={`input-${name}`}>
         {label}
       </label>
