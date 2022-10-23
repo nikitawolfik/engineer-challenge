@@ -12,10 +12,7 @@ const App = () => {
         value={{
           fetcher: (resource, init) =>
             fetch(`${process.env.REACT_APP_API_PATH}${resource}`, init).then(
-              (res) => {
-                console.log("fuck", res);
-                return res.json();
-              }
+              (res) => res.json()
             ),
         }}
       >
